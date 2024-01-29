@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+ minecraft:
+   image: itzg/minecraft-server
+   ports:
+     - "25565:25565"
+   environment:
+     EULA: "TRUE"
+     INIT_MEMORY: 2G
+     MAX_MEMORY: 16G
+     VERSION: 1.20.1
+     ONLINE_MODE: "FALSE"  
+     TYPE: "FORGE"
+     FORGE_VERSION: 47.2.20
+   deploy:
+     resources:
+       limits:
+         memory: 16G 
+         cpus: "6"
+   volumes:
+     - "minecraft:/data"
+volumes:
+  minecraft:
+    driver: azure_file
+    driver_opts:
+      share_name: minedata 
+      storage_account_name: zcraftdata 
